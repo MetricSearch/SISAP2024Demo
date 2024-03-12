@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="FrameworkDetectionExcludesConfiguration">
-    <file type="web" url="file://$PROJECT_DIR$/gwt/gwt-2.10.0/samples/DynaTable/war/WEB-INF/web.xml" />
-    <file type="web" url="file://$PROJECT_DIR$/gwt/gwt-2.10.0/samples/DynaTableRf/src/main/webapp/WEB-INF/web.xml" />
-    <file type="web" url="file://$PROJECT_DIR$/gwt/gwt-2.10.0/samples/Hello/war/WEB-INF/web.xml" />
-    <file type="web" url="file://$PROJECT_DIR$/gwt/gwt-2.10.0/samples/JSON/war/WEB-INF/web.xml" />
-    <file type="web" url="file://$PROJECT_DIR$/gwt/gwt-2.10.0/samples/Mail/war/WEB-INF/web.xml" />
-    <file type="web" url="file://$PROJECT_DIR$/gwt/gwt-2.10.0/samples/MobileWebApp/src/main/webapp/WEB-INF/web.xml" />
-    <file type="web" url="file://$PROJECT_DIR$/gwt/gwt-2.10.0/samples/Showcase/war/WEB-INF/web.xml" />
-    <file type="web" url="file://$PROJECT_DIR$/gwt/gwt-2.10.0/samples/Validation/src/main/webapp/WEB-INF/web.xml" />
+    <file type="web" url="file://$PROJECT_DIR$/gwt-2.11.0/samples/DynaTable/war/WEB-INF/web.xml" />
+    <file type="web" url="file://$PROJECT_DIR$/gwt-2.11.0/samples/DynaTableRf/src/main/webapp/WEB-INF/web.xml" />
+    <file type="web" url="file://$PROJECT_DIR$/gwt-2.11.0/samples/Hello/war/WEB-INF/web.xml" />
+    <file type="web" url="file://$PROJECT_DIR$/gwt-2.11.0/samples/JSON/war/WEB-INF/web.xml" />
+    <file type="web" url="file://$PROJECT_DIR$/gwt-2.11.0/samples/Mail/war/WEB-INF/web.xml" />
+    <file type="web" url="file://$PROJECT_DIR$/gwt-2.11.0/samples/MobileWebApp/src/main/webapp/WEB-INF/web.xml" />
+    <file type="web" url="file://$PROJECT_DIR$/gwt-2.11.0/samples/Showcase/war/WEB-INF/web.xml" />
+    <file type="web" url="file://$PROJECT_DIR$/gwt-2.11.0/samples/Validation/src/main/webapp/WEB-INF/web.xml" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />

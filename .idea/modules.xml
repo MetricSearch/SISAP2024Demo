@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/gwt_sim_images.iml" filepath="$PROJECT_DIR$/gwt_sim_images.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WebImageProject.iml" filepath="$PROJECT_DIR$/WebImageProject.iml" />
     </modules>
   </component>
 </project>
