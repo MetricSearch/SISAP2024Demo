@@ -3,6 +3,9 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/war/WEB-INF/lib/gwt-servlet-deps.jar!/" />
       <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/war/WEB-INF/lib/gwt-servlet.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/war/WEB-INF/lib/eclipse-collections-9.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/war/WEB-INF/lib/hnswlib-core-1.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/war/WEB-INF/lib/eclipse-collections-api-9.2.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
