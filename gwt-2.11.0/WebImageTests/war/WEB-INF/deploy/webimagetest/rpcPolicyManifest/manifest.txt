@@ -1,0 +1,3 @@
+# Module webimagetest
+# RPC service class, partial path of RPC policy file
+uk.ac.standrews.cs.client.SearchService, 0F8E99B94259B9095FFFBEBE6952964B.gwt.rpc

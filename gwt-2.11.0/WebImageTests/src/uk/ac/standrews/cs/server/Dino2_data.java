@@ -14,6 +14,7 @@ public class Dino2_data {
     private static String pathroot = "/Volumes/Data/mf_dino2/mf_dino2_text/";
     private static String javaPathRoot = "/Volumes/Data/mf_dino2/mf_dino2_java/";
     private static String javaLogisticPathRoot = "/Volumes/Data/mf_dino2/mf_dino2_logisticL1_java/";
+    private static String javaSoftmaxPathRoot = "/Volumes/Data/mf_dino2/mf_dino2_softmax_t10/";
 
     public static List<Item<Integer, float[]>> getLogisticL1Data(int noOfFiles) throws IOException {
         List<Item<Integer, float[]>> res = new ArrayList<>();
@@ -22,7 +23,13 @@ public class Dino2_data {
         }
         return res;
     }
-
+    public static List<Item<Integer, float[]>> getSoftmaxData(int noOfFiles) throws IOException {
+        List<Item<Integer, float[]>> res = new ArrayList<>();
+        for (int fileNumber = 0; fileNumber < noOfFiles; fileNumber++) {
+            res.addAll(getSoftmaxDataFile(fileNumber));
+        }
+        return res;
+    }
     public static List<Item<Integer, float[]>> getData(int noOfFiles) throws IOException {
         List<Item<Integer, float[]>> res = new ArrayList<>();
         for (int fileNumber = 1; fileNumber <= noOfFiles; fileNumber++) {
@@ -55,6 +62,44 @@ public class Dino2_data {
 
             return res;
         }
+    }
+
+    private static List<Item<Integer, float[]>> getSoftmaxDataFile(int fileNumber) throws IOException {
+        try {
+            // if it's already here, just read it as an object
+            return getJavaFile(javaSoftmaxPathRoot, fileNumber);
+        } catch (Exception e) {
+            //otherwise, read the raw data, normalise/logistic it, and write the java file
+            List<Item<Integer, float[]>> rawData = getDataFile(fileNumber);
+            List<Item<Integer, float[]>> res = new ArrayList<>();
+            for (Item<Integer, float[]> entry : rawData) {
+                float[] vec = entry.vector();
+                vec = softmax(vec);
+                res.add(new ListItem(entry.id(), vec));
+            }
+
+
+            File f = new File(javaLogisticPathRoot + fileNumber + ".obj");
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
+            oos.writeObject(res);
+            oos.close();
+
+            return res;
+        }
+    }
+
+    private static float[] softmax(float[] vec) {
+        float[] fs = new float[vec.length];
+        double acc = 0;
+        for (int i = 0; i < vec.length; i++) {
+            double term = Math.exp(vec[i]);
+            acc += term;
+            fs[i] = (float) term;
+        }
+        for (int i = 0; i < vec.length; i++) {
+            fs[i] = (float) (fs[i] / acc);
+        }
+        return fs;
     }
 
     private static float[] logistic(float[] vec) {
@@ -142,45 +187,10 @@ public class Dino2_data {
     public static void main(String[] a) throws IOException {
 //        List<Item<Integer, float[]>> d = Dino2_data.getData(600);
 //        List<Item<Integer, float[]>> q = Dino2_data.getQueries(100);
-        List<Item<Integer, float[]>> d = Dino2_data.getLogisticL1Data(1000);
+        List<Item<Integer, float[]>> d = Dino2_data.getSoftmaxDataFile(1);
 
         System.out.println(d.size());
-        float[] d1 = d.get(999999).vector();
-//        float[] q1 = q.get(0).vector();
-        float acc = 0;
-        for (float f : d1) {
-            System.out.println(f);
-            acc += f;
-        }
-        System.out.println(acc);
-        System.out.println(d1.length);
-//        for (float f : q1) {
-//            acc += f * f;
-//        }
-//        System.out.println(acc);
-
-//
-//        DistanceFunction<float[], Float> euc = DistanceFunctions.FLOAT_EUCLIDEAN_DISTANCE;
-//        float[] smGirl = q.get(0).vector();
-//        List<Float> smDists = new ArrayList<>();
-//        for (int i = 0; i < d.size(); i++) {
-//            smDists.add(euc.distance(smGirl, d.get(i).vector()));
-//        }
-//        smDists.sort(new Comparator<Float>() {
-//            @Override
-//            public int compare(Float o1, Float o2) {
-//                return Float.compare(o1, o2);
-//            }
-//        });
-//        for (int i = 0; i < 100; i++) {
-//            System.out.println(smDists.get(i));
-//        }
-
-//        DistanceFunction<float[], Float> tri = DistanceFunctions.FLOAT_EUCLIDEAN_DISTANCE;
-//        float tt1 = tri.distance(q.get(0).vector(), d.get(585585 - 1000).vector());
-//        float tt2 = tri.distance(q.get(0).vector(), d.get(585585 - 999).vector());
-//
-//        System.out.println(tt1 + "; " + tt2);
+        System.out.println(d.get(0).id());
 
     }
 
