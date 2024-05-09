@@ -77,8 +77,8 @@ public class SearchServiceImpl extends RemoteServiceServlet implements
     }
 
     private HnswIndex<Integer, MsedRep, MsedItem, Float> getLoadedIndex() throws IOException {
-        HnswIndex<Integer, MsedRep, MsedItem, Float> res = HnswIndex.load(new File("/Volumes/Data/mf_dino_sm10_hnsw_1m.obj"));
-//        HnswIndex<Integer, MsedRep, MsedItem, Float> res = HnswIndex.load(new File("/Volumes/Data/mf_pl_sm_hnsw_temp_1m.obj"));
+//        HnswIndex<Integer, MsedRep, MsedItem, Float> res = HnswIndex.load(new File("/Volumes/Data/mf_dino_sm10_hnsw_1m.obj"));
+        HnswIndex<Integer, MsedRep, MsedItem, Float> res = HnswIndex.load(new File("/Volumes/Data/mf_pl_sm_hnsw_1m.obj"));
         return res;
     }
 

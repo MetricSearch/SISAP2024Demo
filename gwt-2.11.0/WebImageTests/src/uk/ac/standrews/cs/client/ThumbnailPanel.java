@@ -27,16 +27,24 @@ public class ThumbnailPanel extends VerticalPanel {
         this.add(currentHPanel);
     }
 
+    /**
+     *
+     * @param imageId imageIds number from zero
+     * @return
+     */
     protected static String getFullUrl(int imageId) {
-        imageId = imageId - 1; //numbering all images from 1 instead of 0
         String template = "https://similarity.cs.st-andrews.ac.uk/mirflickr/images/**dirNo**/**imNo**.jpg";
         String dir = "" + ((imageId / 10000));
         String imNo = "" + imageId;
         return template.replace("**dirNo**", dir).replace("**imNo**", imNo);
     }
 
+    /**
+     *
+     * @param imageId imageIds number from zero, but thumbs number from 1
+     * @return
+     */
     protected static String getThumbUrl(int imageId) {
-        imageId = imageId - 1; //numbering all images from 1 instead of 0
         String template = "https://similarity.cs.st-andrews.ac.uk/mirflickr/thumbs/**dirNo**/im**imNo**.jpg";
         String dir = "" + ((imageId / 10000) + 1);
         String imNo = "" + (imageId + 1);

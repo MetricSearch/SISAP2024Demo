@@ -125,7 +125,7 @@ public class CreateMsedPlacesSoftmaxHnsw {
         index.addAll(ms);
         System.out.println("build time: " + (System.currentTimeMillis() - t0));
 
-        index.save(new File("/Volumes/Data/mf_pl_sm_hnsw_temp_1m.obj"));
+        index.save(new File("/Volumes/Data/mf_pl_sm_hnsw_1m.obj"));
 
     }
 }

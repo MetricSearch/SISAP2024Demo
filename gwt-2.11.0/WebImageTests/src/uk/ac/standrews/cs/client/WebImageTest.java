@@ -35,6 +35,7 @@ public class WebImageTest implements EntryPoint {
      */
     public void onModuleLoad() {
 
+        Window.alert("he David");
         Panel buttonPanel = new HorizontalPanel();
         RootPanel.get("buttonPanelContainer").add(buttonPanel);
         Panel imagePanel = new HorizontalPanel();

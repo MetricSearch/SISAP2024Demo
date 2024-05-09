@@ -74,12 +74,12 @@ public class Dino2_data {
             List<Item<Integer, float[]>> res = new ArrayList<>();
             for (Item<Integer, float[]> entry : rawData) {
                 float[] vec = entry.vector();
-                vec = softmax(vec);
+                vec = softmax(vec,10);
                 res.add(new ListItem(entry.id(), vec));
             }
 
 
-            File f = new File(javaLogisticPathRoot + fileNumber + ".obj");
+            File f = new File(javaSoftmaxPathRoot + fileNumber + ".obj");
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
             oos.writeObject(res);
             oos.close();
@@ -88,11 +88,11 @@ public class Dino2_data {
         }
     }
 
-    private static float[] softmax(float[] vec) {
+    private static float[] softmax(float[] vec, float temperature) {
         float[] fs = new float[vec.length];
         double acc = 0;
         for (int i = 0; i < vec.length; i++) {
-            double term = Math.exp(vec[i]);
+            double term = Math.exp(vec[i]) / temperature;
             acc += term;
             fs[i] = (float) term;
         }
@@ -116,11 +116,6 @@ public class Dino2_data {
 
 
     /**
-     * when reading the text files, this code performs RELU...
-     * the text files are already L_2 normed from the original
-     * not obvious why RELU is appplied in fact; I suspect this is an error!!
-     * <p>
-     * so, sorting this guff...
      * 1. rewriting all text files to use raw Dino data, i.e. cosine distance, not normalised
      * 2. deleted all cached data so need to re-read
      * 3. change this code to remove the RELU
