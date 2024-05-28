@@ -17,21 +17,16 @@ public class SearchServiceImpl extends RemoteServiceServlet implements
 
     @Override
     public String initialise(IndexTypes.INDEX_TYPES indexType) {
-        switch (indexType) {
-
-            case MSED:
-                try {
-                    if (this.index == null) {
-                        this.index = getLoadedIndex();
-                    }
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                return "ok";
-            default:
-                return "index type not known";
+        try {
+            if (this.index == null) {
+                this.index = getLoadedIndex(indexType);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+        return "ok";
     }
+
 
     public List<Integer> search(int imageId) {
         List<Integer> res = new ArrayList<>();
@@ -76,12 +71,15 @@ public class SearchServiceImpl extends RemoteServiceServlet implements
         return isr;
     }
 
-    private HnswIndex<Integer, MsedRep, MsedItem, Float> getLoadedIndex() throws IOException {
-        // HnswIndex<Integer, MsedRep, MsedItem, Float> res = HnswIndex.load(new File("/Volumes/Data/mf_dino_sm10_hnsw_1m.obj"));
-        HnswIndex<Integer, MsedRep, MsedItem, Float> res = HnswIndex.load(new File("/Volumes/Data/mf_dino_sm10_hnsw_1m.obj"));
+    private HnswIndex<Integer, MsedRep, MsedItem, Float> getLoadedIndex(IndexTypes.INDEX_TYPES indexType) throws IOException {
+        switch (indexType) {
+            case DINO2_L2:
+                return HnswIndex.load(new File("/Volumes/Data/mf_dino_sm10_hnsw_1m_l2.obj"));
+            case DINO2:
+                return HnswIndex.load(new File("/Volumes/Data/mf_dino_sm10_hnsw_1m.obj"));
+        }
 
-//        HnswIndex<Integer, MsedRep, MsedItem, Float> res = HnswIndex.load(new File("/Volumes/Data/mf_pl_sm_hnsw_1m.obj"));
-        return res;
+        throw new RuntimeException("Unspecified index load!");
     }
 
     private <Tid, Tvector, Tdistance extends Comparable<Tdistance>, Titem extends Item<Tid, Tvector>>

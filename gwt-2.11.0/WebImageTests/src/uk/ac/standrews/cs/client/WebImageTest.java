@@ -16,18 +16,7 @@ import java.util.*;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class WebImageTest implements EntryPoint {
-
-    /**
-     * The message displayed to the user when the server cannot be reached or
-     * returns an error.
-     */
-    private static final String SERVER_ERROR = "An error occurred while "
-            + "attempting to contact the server. Please check your network "
-            + "connection and try again.";
-
-    /**
-     * Create a remote service proxy to talk to the server-side Greeting service.
-     */
+    final IndexTypes.INDEX_TYPES indexType = IndexTypes.INDEX_TYPES.DINO2_L2;
     private final SearchServiceAsync searchService = GWT.create(SearchService.class);
 
     /**
@@ -101,10 +90,10 @@ public class WebImageTest implements EntryPoint {
             }
         });
 
-        buttonPanel.add(new Label("initialising, one moment please..."));
+        buttonPanel.add(new Label("initialising index " + indexType + " , one moment please..."));
         //first, load the dino2/msed hnsw onto the server
         try {
-            searchService.initialise(IndexTypes.INDEX_TYPES.MSED, new AsyncCallback<String>() {
+            searchService.initialise(indexType, new AsyncCallback<String>() {
                 @Override
                 public void onFailure(Throwable e) {
                     Window.alert("oh dear can't initialise: " + e);
@@ -140,10 +129,7 @@ public class WebImageTest implements EntryPoint {
                 RootPanel.get("errorLabelContainer").clear();
 
                 Set<Integer> ids = queryPanel.getQueryIds();
-//                Window.alert("The IDs searched for are: " + ids);
                 imagePanel.clear();
-//                Set<Integer> ids = new HashSet<>();
-//                ids.add(0);
 
                 searchService.search(ids, new AsyncCallback<IndexSearchResult>() {
                     @Override
@@ -166,32 +152,5 @@ public class WebImageTest implements EntryPoint {
             }
         });
         return searchButton;
-    }
-
-    private void addInitialiseButton(final Button searchButton, Panel buttonPanel) {
-        final Button button = new Button("initialise");
-        button.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent clickEvent) {
-                try {
-                    searchService.initialise(IndexTypes.INDEX_TYPES.MSED, new AsyncCallback<String>() {
-                        @Override
-                        public void onFailure(Throwable e) {
-                            Window.alert("oh dear can't initialise: " + e);
-                        }
-
-                        @Override
-                        public void onSuccess(String s) {
-                            button.setEnabled(false);
-                            searchButton.setEnabled(true);
-
-                        }
-                    });
-                } catch (Exception e) {
-                    Window.alert("oh dear: " + e);
-                }
-            }
-        });
-        buttonPanel.add(button);
     }
 }
