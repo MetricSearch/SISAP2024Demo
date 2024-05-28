@@ -35,7 +35,6 @@ public class WebImageTest implements EntryPoint {
      */
     public void onModuleLoad() {
 
-        Window.alert("he David");
         Panel buttonPanel = new HorizontalPanel();
         RootPanel.get("buttonPanelContainer").add(buttonPanel);
         Panel imagePanel = new HorizontalPanel();
@@ -55,6 +54,7 @@ public class WebImageTest implements EntryPoint {
             public void onClick(ClickEvent clickEvent) {
                 Set<Integer> newIds = queryPanel.getQueryIds();
                 queryPanel.updateImageIds(newIds);
+                Window.alert(newIds.toString());
             }
         });
 
@@ -104,8 +104,10 @@ public class WebImageTest implements EntryPoint {
             @Override
             public void onClick(ClickEvent clickEvent) {
 
-                imagePanel.clear();
+
                 Set<Integer> ids = queryPanel.getQueryIds();
+//                Window.alert("The IDs searched for are: " + ids);
+                imagePanel.clear();
 //                Set<Integer> ids = new HashSet<>();
 //                ids.add(0);
 
@@ -121,6 +123,7 @@ public class WebImageTest implements EntryPoint {
                             List<Integer> resultIds = sr.result;
                             imagePanel.add(new ThumbnailPanel(resultIds, queryPanel.getQueryIds()));
                             RootPanel.get("errorLabelContainer").add(new Label("time: " + sr.time));
+//                            Window.alert("Got " + sr.result.size() + " results back");
                         } catch (Exception e) {
                             Window.alert("" + e);
                         }
