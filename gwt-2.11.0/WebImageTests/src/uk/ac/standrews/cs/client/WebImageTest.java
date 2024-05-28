@@ -48,15 +48,45 @@ public class WebImageTest implements EntryPoint {
         Button searchButton = getSearchButton(queryPanel, imagePanel);
 //        addInitialiseButton(searchButton, buttonPanel);
 
+        TextBox queryBox = new TextBox();
+
+        Button queryIDButton = new Button("add mf query id", new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent clickEvent) {
+                try {
+                    Set<Integer> newIds = queryPanel.getQueryIds();
+                    int id = Integer.parseInt(queryBox.getValue());
+
+                    if (id < 0 || id > 999999) {
+                        throw new NumberFormatException();
+                    }
+
+                    newIds.add(id);
+                    queryPanel.updateImageIds(newIds);
+                } catch (NumberFormatException e) {
+                    Window.alert("Please enter a valid number!");
+                }
+            }
+        });
+
         Button updateQuery = new Button("update query");
         updateQuery.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent clickEvent) {
                 Set<Integer> newIds = queryPanel.getQueryIds();
                 queryPanel.updateImageIds(newIds);
-                Window.alert(newIds.toString());
             }
         });
+
+        Button clear = new Button("clear queries");
+        clear.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent clickEvent) {
+                queryPanel.clear();
+                RootPanel.get("errorLabelContainer").clear();
+            }
+        });
+
 
         Button randomImages = new Button("random query");
         randomImages.addClickHandler(new ClickHandler() {
@@ -83,11 +113,15 @@ public class WebImageTest implements EntryPoint {
                 @Override
                 public void onSuccess(String s) {
                     buttonPanel.clear();
-                    ;
                     buttonPanel.add(searchButton);
                     searchButton.setEnabled(true);
                     buttonPanel.add(updateQuery);
+
+                    buttonPanel.add(queryBox);
+                    buttonPanel.add(queryIDButton);
+
                     buttonPanel.add(randomImages);
+                    buttonPanel.add(clear);
                 }
             });
         } catch (Exception e) {
@@ -103,7 +137,7 @@ public class WebImageTest implements EntryPoint {
         searchButton.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent clickEvent) {
-
+                RootPanel.get("errorLabelContainer").clear();
 
                 Set<Integer> ids = queryPanel.getQueryIds();
 //                Window.alert("The IDs searched for are: " + ids);
@@ -150,6 +184,7 @@ public class WebImageTest implements EntryPoint {
                         public void onSuccess(String s) {
                             button.setEnabled(false);
                             searchButton.setEnabled(true);
+
                         }
                     });
                 } catch (Exception e) {

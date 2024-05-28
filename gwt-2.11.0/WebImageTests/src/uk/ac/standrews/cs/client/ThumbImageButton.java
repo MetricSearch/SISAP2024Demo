@@ -6,12 +6,12 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.*;
 
-import java.util.List;
 import java.util.Set;
 
 public class ThumbImageButton extends VerticalPanel {
     ThumbImageButton(int id, Set<Integer> selectedIds,boolean checkBoxStatus) {
         Image th = new Image(ThumbnailPanel.getThumbUrl(id));
+        Label label = new Label("ID: " + id);
         th.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent clickEvent) {
@@ -28,6 +28,7 @@ public class ThumbImageButton extends VerticalPanel {
             }
         });
         this.add(th);
+        this.add(label);
 
         CheckBox cb = new CheckBox();
         cb.setValue(checkBoxStatus);
