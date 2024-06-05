@@ -92,7 +92,7 @@ public class Dino2_data {
         float[] fs = new float[vec.length];
         double acc = 0;
         for (int i = 0; i < vec.length; i++) {
-            double term = Math.exp(vec[i]) / temperature;
+            double term = Math.exp(vec[i] / temperature);
             acc += term;
             fs[i] = (float) term;
         }
