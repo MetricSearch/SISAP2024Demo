@@ -1,5 +1,6 @@
 package uk.ac.standrews.cs.client;
 
+import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.core.client.EntryPoint;
@@ -10,6 +11,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import uk.ac.standrews.cs.shared.IndexTypes;
 import uk.ac.standrews.cs.shared.IndexSearchResult;
 
+import javax.servlet.jsp.tagext.JspTag;
 import java.util.*;
 
 /**
@@ -19,6 +21,7 @@ public class WebImageTest implements EntryPoint {
     final IndexTypes.INDEX_TYPES indexType = IndexTypes.INDEX_TYPES.DINO2_L2;
     private final SearchServiceAsync searchService = GWT.create(SearchService.class);
     List<Integer> resultIds;
+    HashMap<String, Integer> exampleQueries;
     /**
      * From https://stackoverflow.com/questions/1317052/how-to-copy-to-clipboard-with-gwt
      * @param text
@@ -82,6 +85,15 @@ public class WebImageTest implements EntryPoint {
      * This is the entry point method.
      */
     public void onModuleLoad() {
+        exampleQueries = new HashMap<>();
+
+        // Make a command that we will execute from all leaves.
+        Command cmd = new Command() {
+            public void execute() {
+                Window.alert("You selected a menu item!");
+            }
+        };
+
         resultIds = new ArrayList<>();
         Panel buttonPanel = new HorizontalPanel();
         RootPanel.get("buttonPanelContainer").add(buttonPanel);
@@ -144,12 +156,35 @@ public class WebImageTest implements EntryPoint {
             }
         });
 
-        Button examplesButton = new Button("examples", new ClickHandler() {
+
+        DisclosurePanel examples = new DisclosurePanel("Examples");
+        examples.setAnimationEnabled(true);
+
+        exampleQueries = addExampleQueries();
+
+        VerticalPanel optionsPanel = new VerticalPanel();
+
+        for (String s : exampleQueries.keySet()) {
+            optionsPanel.add(new Button(s, new ClickHandler() {
+                @Override
+                public void onClick(ClickEvent clickEvent) {
+                    Set<Integer> newIds = queryPanel.getQueryIds();
+                    newIds.add(exampleQueries.get(s));
+                    queryPanel.updateImageIds(newIds);
+                }
+            }));
+        }
+
+        examples.setContent(optionsPanel);
+
+
+        Button openExamples = new Button("Toggle Options", new ClickHandler() {
             @Override
             public void onClick(ClickEvent clickEvent) {
-
+                examples.setOpen(!examples.isOpen());
             }
         });
+
 
         Button updateQuery = new Button("update query");
         updateQuery.addClickHandler(new ClickHandler() {
@@ -165,6 +200,7 @@ public class WebImageTest implements EntryPoint {
             @Override
             public void onClick(ClickEvent clickEvent) {
                 queryPanel.clear();
+                queryPanel.updateImageIds(new TreeSet<>());
                 RootPanel.get("errorLabelContainer").clear();
             }
         });
@@ -202,16 +238,32 @@ public class WebImageTest implements EntryPoint {
                     buttonPanel.add(queryBox);
                     buttonPanel.add(queryIDButton);
                     buttonPanel.add(randomImages);
-                    buttonPanel.add(examplesButton);
                     buttonPanel.add(clear);
                     buttonPanel.add(copyButton);
                     buttonPanel.add(helpButton);
+
+                    buttonPanel.add(examples);
+
+
                 }
             });
         } catch (Exception e) {
             Window.alert("oh dear: " + e);
         }
 
+    }
+
+    private HashMap<String, Integer> addExampleQueries() {
+        HashMap<String, Integer> map = new HashMap<>();
+
+        map.put("Bugatti", 181360);
+        map.put("Bottle", 808080);
+        map.put("Dog", 370921);
+        map.put("Peacock", 101102);
+        map.put("Blue Tit", 263209);
+        map.put("Clownfish", 224598);
+
+        return map;
     }
 
     private Button getSearchButton(QueryPanel queryPanel, Panel imagePanel) {
