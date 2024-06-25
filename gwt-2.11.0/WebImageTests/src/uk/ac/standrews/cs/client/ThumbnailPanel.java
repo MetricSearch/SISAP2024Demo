@@ -13,7 +13,10 @@ import java.util.TreeSet;
 
 public class ThumbnailPanel extends VerticalPanel {
 
-    ThumbnailPanel(List<Integer> ids, List<Float> dists, Set<Integer> chosenIds) {
+    public final List<Float> dists;
+
+    ThumbnailPanel(List<Integer> ids, List<Float> dists, Set<Integer> chosenIds, boolean showId, boolean showDists, boolean showRanks) {
+
         Panel currentHPanel = new HorizontalPanel();
         int noOfImagesAdded = 0;
         for (int i = 0; i < ids.size(); i++) {
@@ -21,10 +24,11 @@ public class ThumbnailPanel extends VerticalPanel {
                 this.add(currentHPanel);
                 currentHPanel = new HorizontalPanel();
             }
-            currentHPanel.add(new ThumbImageButton(ids.get(i), dists.get(i), chosenIds,false));
+            currentHPanel.add(new ThumbImageButton(ids.get(i), dists.get(i), chosenIds,false, showId, showDists, showRanks, i + 1));
             noOfImagesAdded++;
         }
         this.add(currentHPanel);
+        this.dists = dists;
     }
 
     /**

@@ -15,14 +15,14 @@ public class QueryPanel extends HorizontalPanel {
         Random r = new Random();
         int queryId = 0;//r.nextInt(1_000_000);
         queryIds.add(queryId);
-        this.add(new ThumbImageButton(queryId, -1, queryIds, true));
+        this.add(new ThumbImageButton(queryId, -1, queryIds, true, true, false, false, -1));
     }
 
     public void updateImageIds(Set<Integer> queryIds) {
         this.queryIds = queryIds;
         this.clear();
         for (int queryId : queryIds) {
-            this.add(new ThumbImageButton(queryId, -1, queryIds, true));
+            this.add(new ThumbImageButton(queryId, -1, queryIds, true, true, false, false, -1));
         }
     }
 

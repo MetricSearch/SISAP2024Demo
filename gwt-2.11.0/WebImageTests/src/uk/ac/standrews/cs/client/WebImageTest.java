@@ -1,6 +1,8 @@
 package uk.ac.standrews.cs.client;
 
 import com.google.gwt.dom.client.Style;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
@@ -24,7 +26,10 @@ public class WebImageTest implements EntryPoint {
     final IndexTypes.INDEX_TYPES indexType = IndexTypes.INDEX_TYPES.DINO2_L2;
     private final SearchServiceAsync searchService = GWT.create(SearchService.class);
     List<Integer> resultIds;
+    IndexSearchResult lastSearch;
     HashMap<String, Integer> exampleQueries;
+    boolean toggleId = true;
+    boolean toggleDist, toggleRank;
     /**
      * From https://stackoverflow.com/questions/1317052/how-to-copy-to-clipboard-with-gwt
      * @param text
@@ -137,8 +142,41 @@ public class WebImageTest implements EntryPoint {
         RootLayoutPanel.get().add(dp);
 
         Button searchButton = getSearchButton(queryPanel, imagePanel, timePanel);
-//        addInitialiseButton(searchButton, buttonPanel);
-//
+
+        CheckBox showIds = new CheckBox();
+        showIds.setValue(true);
+        CheckBox showDists = new CheckBox();
+        CheckBox showRank = new CheckBox();
+
+        showIds.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+            @Override
+            public void onValueChange(ValueChangeEvent<Boolean> valueChangeEvent) {
+                toggleId = valueChangeEvent.getValue();
+                imagePanel.clear();
+                imagePanel.add(new ThumbnailPanel(lastSearch.result, lastSearch.distances, queryPanel.getQueryIds(), showIds.getValue(), showDists.getValue(), showRank.getValue()));
+            }
+        });
+
+        showDists.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+            @Override
+            public void onValueChange(ValueChangeEvent<Boolean> valueChangeEvent) {
+                toggleDist = valueChangeEvent.getValue();
+                imagePanel.clear();
+                imagePanel.add(new ThumbnailPanel(lastSearch.result, lastSearch.distances, queryPanel.getQueryIds(), showIds.getValue(), showDists.getValue(), showRank.getValue()));
+            }
+        });
+
+        showRank.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+            @Override
+            public void onValueChange(ValueChangeEvent<Boolean> valueChangeEvent) {
+                toggleRank = valueChangeEvent.getValue();
+                imagePanel.clear();
+                imagePanel.add(new ThumbnailPanel(lastSearch.result, lastSearch.distances, queryPanel.getQueryIds(), showIds.getValue(), showDists.getValue(), showRank.getValue()));
+            }
+        });
+
+
+
         TextBox queryBox = new TextBox();
 
         Button queryIDButton = new Button("add mf query id", new ClickHandler() {
@@ -242,6 +280,15 @@ public class WebImageTest implements EntryPoint {
                     buttonPanel.add(copyButton);
                     buttonPanel.add(helpButton);
 
+                    buttonPanel.add(new Label("Show ID"));
+                    buttonPanel.add(showIds);
+
+                    buttonPanel.add(new Label("Show Dist"));
+                    buttonPanel.add(showDists);
+
+                    buttonPanel.add(new Label("Show Rank"));
+                    buttonPanel.add(showRank);
+
 //
                 }
             });
@@ -272,10 +319,11 @@ public class WebImageTest implements EntryPoint {
                     @Override
                     public void onSuccess(IndexSearchResult sr) {
                         try {
+                            lastSearch = sr;
                             resultIds = sr.result;
                             List<Float> dists = sr.distances;
                             timePanel.clear();
-                            imagePanel.add(new ThumbnailPanel(resultIds, dists, queryPanel.getQueryIds()));
+                            imagePanel.add(new ThumbnailPanel(resultIds, dists, queryPanel.getQueryIds(), toggleId, toggleDist, toggleRank));
                             timePanel.add(new HTML("<h3 style=color:red> time: "  + sr.time + "ms</style>"));
 //                            Window.alert("Got " + sr.result.size() + " results back");
                         } catch (Exception e) {

@@ -9,18 +9,29 @@ import com.google.gwt.i18n.client.NumberFormat;
 import java.util.Set;
 
 public class ThumbImageButton extends VerticalPanel {
-    public static boolean showID;
-    public static boolean showDistancel;
 
-    ThumbImageButton(int id, float dist, Set<Integer> selectedIds, boolean checkBoxStatus) {
+    ThumbImageButton(int id, float dist, Set<Integer> selectedIds, boolean checkBoxStatus, boolean ids, boolean dists, boolean ranks, int rank) {
         Image th = new Image(ThumbnailPanel.getThumbUrl(id));
-        Label label;
-        if (dist != -1) {
-            String formattedDist = NumberFormat.getFormat("0.####E0").format(dist);
-            label  = new HTML("<b>ID:</b> " + id + "<br><b>Dist:</b> " + formattedDist);
-        } else {
-            label = new Label("ID: " + id);
+
+        StringBuilder sb = new StringBuilder();
+
+        if (ids) {
+            sb.append("<b>ID:</b>" + id + "<br>");
         }
+
+        // TODO change
+        if (ranks) {
+            sb.append("<b>Rank:</b>" + rank + "<br>");
+        }
+
+        if (dist != -1 && dists) {
+            String formattedDist = NumberFormat.getFormat("0.####E0").format(dist);
+            sb.append("<b>Dist:</b> " + formattedDist + "<br>");
+            //label = new HTML("<b>ID:</b> " + id + "<br><b>Dist:</b> " + formattedDist);
+        }
+
+        Label label = new HTML(sb.toString());
+
 
         th.addClickHandler(new ClickHandler() {
             @Override
