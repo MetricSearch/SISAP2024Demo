@@ -1,5 +1,6 @@
 package uk.ac.standrews.cs.client;
 
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
@@ -13,6 +14,8 @@ import uk.ac.standrews.cs.shared.IndexSearchResult;
 
 import javax.servlet.jsp.tagext.JspTag;
 import java.util.*;
+
+import static com.google.gwt.dom.client.Style.Unit.PCT;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -87,27 +90,50 @@ public class WebImageTest implements EntryPoint {
     public void onModuleLoad() {
         exampleQueries = new HashMap<>();
 
-        // Make a command that we will execute from all leaves.
-        Command cmd = new Command() {
-            public void execute() {
-                Window.alert("You selected a menu item!");
-            }
-        };
+        LayoutPanel dp = new LayoutPanel();
+
+        HorizontalPanel title = new HorizontalPanel();
+        title.setWidth("100%");
+        title.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+        title.add(new HTML("<h1>Dino2s Encoded MirFlickr 1M Polyquery</h1>"));
 
         resultIds = new ArrayList<>();
         Panel buttonPanel = new HorizontalPanel();
-        RootPanel.get("buttonPanelContainer").add(buttonPanel);
-        Panel imagePanel = new HorizontalPanel();
-        RootPanel.get("imagePanelContainer").add(imagePanel);
+        Panel imagePanel = new ScrollPanel();
 
         Panel queryPanelContainer = new HorizontalPanel();
         QueryPanel queryPanel = new QueryPanel();
         queryPanelContainer.add(queryPanel);
-        RootPanel.get("queryPanelContainer").add(queryPanelContainer);
+
+        Panel examplePanelContainer = new ScrollPanel();
+        examplePanelContainer.setWidth("100%");
+        ExamplesPanel examples = new ExamplesPanel(queryPanel);
+        examplePanelContainer.add(examples);
+
+        dp.add(title);
+        dp.add(buttonPanel);
+        dp.add(queryPanel);
+        dp.add(imagePanel);
+        dp.add(examplePanelContainer);
+
+        dp.setWidgetTopHeight(buttonPanel, 10, PCT, 10, PCT);
+        dp.setWidgetLeftWidth(buttonPanel, 5, PCT, 100, PCT);
+
+        dp.setWidgetTopHeight(title, 0, PCT, 10, PCT);
+
+        dp.setWidgetTopHeight(queryPanel, 20, PCT, 20, PCT);
+        dp.setWidgetLeftWidth(queryPanel, 5, PCT, 100, PCT);
+
+        dp.setWidgetTopHeight(imagePanel, 35, PCT, 58, PCT);
+        dp.setWidgetLeftWidth(imagePanel, 5, PCT, 100, PCT);
+
+        dp.setWidgetRightWidth(examplePanelContainer, 10, PCT, 10, PCT);
+        dp.setWidgetTopHeight(examplePanelContainer, 35, PCT, 100, PCT);
+        RootLayoutPanel.get().add(dp);
 
         Button searchButton = getSearchButton(queryPanel, imagePanel);
 //        addInitialiseButton(searchButton, buttonPanel);
-
+//
         TextBox queryBox = new TextBox();
 
         Button queryIDButton = new Button("add mf query id", new ClickHandler() {
@@ -128,7 +154,6 @@ public class WebImageTest implements EntryPoint {
                 }
             }
         });
-
 
         Button copyButton = new Button("copy result IDs", new ClickHandler() {
             @Override
@@ -155,36 +180,6 @@ public class WebImageTest implements EntryPoint {
 
             }
         });
-
-
-        DisclosurePanel examples = new DisclosurePanel("Examples");
-        examples.setAnimationEnabled(true);
-
-        exampleQueries = addExampleQueries();
-
-        VerticalPanel optionsPanel = new VerticalPanel();
-
-        for (String s : exampleQueries.keySet()) {
-            optionsPanel.add(new Button(s, new ClickHandler() {
-                @Override
-                public void onClick(ClickEvent clickEvent) {
-                    Set<Integer> newIds = queryPanel.getQueryIds();
-                    newIds.add(exampleQueries.get(s));
-                    queryPanel.updateImageIds(newIds);
-                }
-            }));
-        }
-
-        examples.setContent(optionsPanel);
-
-
-        Button openExamples = new Button("Toggle Options", new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent clickEvent) {
-                examples.setOpen(!examples.isOpen());
-            }
-        });
-
 
         Button updateQuery = new Button("update query");
         updateQuery.addClickHandler(new ClickHandler() {
@@ -234,7 +229,7 @@ public class WebImageTest implements EntryPoint {
                     buttonPanel.add(searchButton);
                     searchButton.setEnabled(true);
                     buttonPanel.add(updateQuery);
-
+//
                     buttonPanel.add(queryBox);
                     buttonPanel.add(queryIDButton);
                     buttonPanel.add(randomImages);
@@ -242,28 +237,13 @@ public class WebImageTest implements EntryPoint {
                     buttonPanel.add(copyButton);
                     buttonPanel.add(helpButton);
 
-                    buttonPanel.add(examples);
-
-
+//
                 }
             });
         } catch (Exception e) {
             Window.alert("oh dear: " + e);
         }
 
-    }
-
-    private HashMap<String, Integer> addExampleQueries() {
-        HashMap<String, Integer> map = new HashMap<>();
-
-        map.put("Bugatti", 181360);
-        map.put("Bottle", 808080);
-        map.put("Dog", 370921);
-        map.put("Peacock", 101102);
-        map.put("Blue Tit", 263209);
-        map.put("Clownfish", 224598);
-
-        return map;
     }
 
     private Button getSearchButton(QueryPanel queryPanel, Panel imagePanel) {
