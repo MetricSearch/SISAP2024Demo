@@ -275,7 +275,7 @@ public class WebImageTest implements EntryPoint {
                             resultIds = sr.result;
                             List<Float> dists = sr.distances;
                             imagePanel.add(new ThumbnailPanel(resultIds, dists, queryPanel.getQueryIds()));
-                            timePanel.add(new HTML("<h3 style=color:red> time: "  + sr.time + "</style>"));
+                            timePanel.add(new HTML("<h3 style=color:red> time: "  + sr.time + "ms</style>"));
 //                            Window.alert("Got " + sr.result.size() + " results back");
                         } catch (Exception e) {
                             Window.alert("Uh oh search problem! " + e);
