@@ -109,12 +109,14 @@ public class WebImageTest implements EntryPoint {
         examplePanelContainer.setWidth("100%");
         ExamplesPanel examples = new ExamplesPanel(queryPanel);
         examplePanelContainer.add(examples);
+        HorizontalPanel timePanel = new HorizontalPanel();
 
         dp.add(title);
         dp.add(buttonPanel);
         dp.add(queryPanel);
         dp.add(imagePanel);
         dp.add(examplePanelContainer);
+        dp.add(timePanel);
 
         dp.setWidgetTopHeight(buttonPanel, 10, PCT, 10, PCT);
         dp.setWidgetLeftWidth(buttonPanel, 5, PCT, 100, PCT);
@@ -128,10 +130,13 @@ public class WebImageTest implements EntryPoint {
         dp.setWidgetLeftWidth(imagePanel, 5, PCT, 100, PCT);
 
         dp.setWidgetRightWidth(examplePanelContainer, 10, PCT, 10, PCT);
-        dp.setWidgetTopHeight(examplePanelContainer, 5, PCT, 100, PCT);
+        dp.setWidgetTopHeight(examplePanelContainer, 5, PCT, 90, PCT);
+
+        dp.setWidgetBottomHeight(timePanel, 1, PCT, 5, PCT);
+        dp.setWidgetLeftWidth(timePanel, 50, PCT, 100, PCT);
         RootLayoutPanel.get().add(dp);
 
-        Button searchButton = getSearchButton(queryPanel, imagePanel);
+        Button searchButton = getSearchButton(queryPanel, imagePanel, timePanel);
 //        addInitialiseButton(searchButton, buttonPanel);
 //
         TextBox queryBox = new TextBox();
@@ -246,7 +251,7 @@ public class WebImageTest implements EntryPoint {
 
     }
 
-    private Button getSearchButton(QueryPanel queryPanel, Panel imagePanel) {
+    private Button getSearchButton(QueryPanel queryPanel, Panel imagePanel, HorizontalPanel timePanel) {
         Button searchButton = new Button("search");
         searchButton.setEnabled(false);
 
@@ -270,7 +275,7 @@ public class WebImageTest implements EntryPoint {
                             resultIds = sr.result;
                             List<Float> dists = sr.distances;
                             imagePanel.add(new ThumbnailPanel(resultIds, dists, queryPanel.getQueryIds()));
-                            RootPanel.get("errorLabelContainer").add(new Label("time: " + sr.time));
+                            timePanel.add(new HTML("<h3 style=color:red> time: "  + sr.time + "</style>"));
 //                            Window.alert("Got " + sr.result.size() + " results back");
                         } catch (Exception e) {
                             Window.alert("Uh oh search problem! " + e);

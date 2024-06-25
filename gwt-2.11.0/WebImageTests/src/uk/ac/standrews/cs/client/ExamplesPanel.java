@@ -42,13 +42,24 @@ public class ExamplesPanel extends VerticalPanel {
     private HashMap<String, Integer> addExampleQueries() {
         HashMap<String, Integer> map = new HashMap<>();
 
+        /**
+         * Bottle
+         *  ids: 999128,269098,205819 Burger
+         *  ids: 238785,518748,779454
+         */
         map.put("Bugatti", 181360);
-        map.put("Bottle", 808080);
         map.put("Dog", 370921);
         map.put("Peacock", 101102);
         map.put("Blue Tit", 263209);
         map.put("Clownfish", 224598);
+        map.put("Burger1", 999128);
+        map.put("Burger2", 269098);
+        map.put("Burger3", 205819);
 
+        map.put("Bottle", 808080);
+        map.put("Bottle1", 999128);
+        map.put("Bottle2", 269098);
+        map.put("Bottle3", 205819);
         return map;
     }
 }
