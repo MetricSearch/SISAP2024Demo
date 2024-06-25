@@ -41,7 +41,10 @@ public class SearchServiceImpl extends RemoteServiceServlet implements
     public IndexSearchResult search(Set<Integer> imageIds) {
         List<Integer> qids = new ArrayList<>();
         qids.addAll(imageIds);
+
         List<Integer> res = new ArrayList<>();
+        List<Float> dists = new ArrayList<>();
+
         long time = 0;
 
         if (imageIds.size() == 1) {
@@ -50,6 +53,7 @@ public class SearchServiceImpl extends RemoteServiceServlet implements
             time = System.currentTimeMillis() - t0;
             for (SearchResult<MsedItem, Float> r : queryResults) {
                 res.add(r.item().id());
+                dists.add(r.distance());
             }
         } else {
             List<float[]> reps = new ArrayList<>();
@@ -63,11 +67,13 @@ public class SearchServiceImpl extends RemoteServiceServlet implements
             time = System.currentTimeMillis() - t0;
             for (SearchResult<MsedItem, Float> r : queryResults) {
                 res.add(r.item().id());
+                dists.add(r.distance());
             }
         }
         IndexSearchResult isr = new IndexSearchResult();
         isr.result = res;
         isr.time = time;
+        isr.distances = dists;
         return isr;
     }
 

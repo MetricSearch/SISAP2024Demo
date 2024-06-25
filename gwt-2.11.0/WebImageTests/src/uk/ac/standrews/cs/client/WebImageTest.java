@@ -288,11 +288,13 @@ public class WebImageTest implements EntryPoint {
                     public void onSuccess(IndexSearchResult sr) {
                         try {
                             resultIds = sr.result;
-                            imagePanel.add(new ThumbnailPanel(resultIds, queryPanel.getQueryIds()));
+                            List<Float> dists = sr.distances;
+                            imagePanel.add(new ThumbnailPanel(resultIds, dists, queryPanel.getQueryIds()));
                             RootPanel.get("errorLabelContainer").add(new Label("time: " + sr.time));
 //                            Window.alert("Got " + sr.result.size() + " results back");
                         } catch (Exception e) {
-                            Window.alert("" + e);
+                            Window.alert("Uh oh search problem! " + e);
+                            Window.alert("Size of result set: " + sr.result.size() + " dists " + sr.distances.size());
                         }
                     }
                 });

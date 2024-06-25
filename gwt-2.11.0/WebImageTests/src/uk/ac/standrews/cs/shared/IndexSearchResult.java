@@ -7,4 +7,5 @@ import java.util.List;
 public class IndexSearchResult implements IsSerializable {
     public long time;
     public List<Integer> result;
+    public List<Float> distances;
 }

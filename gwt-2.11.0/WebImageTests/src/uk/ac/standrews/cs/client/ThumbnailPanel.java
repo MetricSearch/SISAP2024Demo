@@ -13,15 +13,15 @@ import java.util.TreeSet;
 
 public class ThumbnailPanel extends VerticalPanel {
 
-    ThumbnailPanel(List<Integer> ids, Set<Integer> chosenIds) {
+    ThumbnailPanel(List<Integer> ids, List<Float> dists, Set<Integer> chosenIds) {
         Panel currentHPanel = new HorizontalPanel();
         int noOfImagesAdded = 0;
-        for (int id : ids) {
+        for (int i = 0; i < ids.size(); i++) {
             if (noOfImagesAdded != 0 && noOfImagesAdded % 10 == 0) {
                 this.add(currentHPanel);
                 currentHPanel = new HorizontalPanel();
             }
-            currentHPanel.add(new ThumbImageButton(id, chosenIds,false));
+            currentHPanel.add(new ThumbImageButton(ids.get(i), dists.get(i), chosenIds,false));
             noOfImagesAdded++;
         }
         this.add(currentHPanel);
