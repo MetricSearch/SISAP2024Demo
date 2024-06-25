@@ -2,10 +2,7 @@ package uk.ac.standrews.cs.client;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DisclosurePanel;
-import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.*;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -14,6 +11,7 @@ public class ExamplesPanel extends VerticalPanel {
     HashMap<String, Integer> exampleQueries;
 
     public ExamplesPanel(QueryPanel queryPanel) {
+        this.add(new HTML("<h2>Example Queries</h2>"));
         DisclosurePanel examples = new DisclosurePanel("Examples");
         examples.setAnimationEnabled(true);
 

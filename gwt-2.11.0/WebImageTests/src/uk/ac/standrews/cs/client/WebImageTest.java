@@ -128,7 +128,7 @@ public class WebImageTest implements EntryPoint {
         dp.setWidgetLeftWidth(imagePanel, 5, PCT, 100, PCT);
 
         dp.setWidgetRightWidth(examplePanelContainer, 10, PCT, 10, PCT);
-        dp.setWidgetTopHeight(examplePanelContainer, 35, PCT, 100, PCT);
+        dp.setWidgetTopHeight(examplePanelContainer, 5, PCT, 100, PCT);
         RootLayoutPanel.get().add(dp);
 
         Button searchButton = getSearchButton(queryPanel, imagePanel);
