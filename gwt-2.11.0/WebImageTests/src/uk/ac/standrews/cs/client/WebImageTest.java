@@ -103,7 +103,8 @@ public class WebImageTest implements EntryPoint {
         title.add(new HTML("<h1>Dino2s Encoded MirFlickr 1M Polyquery</h1>"));
 
         resultIds = new ArrayList<>();
-        Panel buttonPanel = new HorizontalPanel();
+        HorizontalPanel buttonPanel = new HorizontalPanel();
+        buttonPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         Panel imagePanel = new ScrollPanel();
 
         Panel queryPanelContainer = new HorizontalPanel();
@@ -269,6 +270,7 @@ public class WebImageTest implements EntryPoint {
                 @Override
                 public void onSuccess(String s) {
                     buttonPanel.clear();
+
                     buttonPanel.add(searchButton);
                     searchButton.setEnabled(true);
                     buttonPanel.add(updateQuery);
@@ -280,6 +282,7 @@ public class WebImageTest implements EntryPoint {
                     buttonPanel.add(copyButton);
                     buttonPanel.add(helpButton);
 
+                    SimplePanel test = new SimplePanel();
                     buttonPanel.add(new Label("Show ID"));
                     buttonPanel.add(showIds);
 
@@ -289,7 +292,7 @@ public class WebImageTest implements EntryPoint {
                     buttonPanel.add(new Label("Show Rank"));
                     buttonPanel.add(showRank);
 
-//
+
                 }
             });
         } catch (Exception e) {
