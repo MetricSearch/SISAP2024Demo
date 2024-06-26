@@ -292,6 +292,10 @@ public class WebImageTest implements EntryPoint {
                     buttonPanel.add(new Label("Show Rank"));
                     buttonPanel.add(showRank);
 
+                    Image goat = new Image();
+                    goat.setUrl("https://avatars.githubusercontent.com/u/126571492?s=200&v=4");
+                    goat.setPixelSize(64, 64);
+                    title.add(goat);
 
                 }
             });
