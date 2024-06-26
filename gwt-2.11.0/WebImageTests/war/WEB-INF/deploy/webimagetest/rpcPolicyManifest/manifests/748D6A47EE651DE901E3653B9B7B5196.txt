@@ -1,0 +1,2 @@
+serviceClass: uk.ac.standrews.cs.client.SearchService
+path: E0F659F6C2C5A0F36A1C05FBD26DCEE6.gwt.rpc
