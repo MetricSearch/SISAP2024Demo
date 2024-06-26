@@ -1,0 +1,40 @@
+<component name="libraryTable">
+  <library name="eclipse-collections-9.2.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/eclipse-collections-9.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/eclipse-collections-api-9.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/gwt-api-checker.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/gwt-codeserver.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/gwt-dev.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/gwt-servlet-deps.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/gwt-servlet-jakarta.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/gwt-servlet.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/gwt-user.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/hnswlib-core-1.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/requestfactory-apt.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/requestfactory-client.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/requestfactory-client+src.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/requestfactory-server-jakarta.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/requestfactory-server-jakarta+src.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/requestfactory-server.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/requestfactory-server+src.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/validation-api-1.0.0.GA.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/gwt-codeserver.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/gwt-dev.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/gwt-servlet-jakarta-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/gwt-servlet-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/gwt-user.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/requestfactory-apt-src.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/requestfactory-client-src.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/requestfactory-client+src.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/requestfactory-server-jakarta-src.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/requestfactory-server-jakarta+src.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/requestfactory-server-src.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/requestfactory-server+src.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gwt-2.11.0/WebImageTests/lib/validation-api-1.0.0.GA-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

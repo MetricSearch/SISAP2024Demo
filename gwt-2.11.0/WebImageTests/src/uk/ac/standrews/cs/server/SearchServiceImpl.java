@@ -2,21 +2,41 @@ package uk.ac.standrews.cs.server;
 
 import com.github.jelmerk.knn.*;
 import com.github.jelmerk.knn.hnsw.HnswIndex;
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+
 import uk.ac.standrews.cs.client.SearchService;
+
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import uk.ac.standrews.cs.shared.IndexSearchResult;
 import uk.ac.standrews.cs.shared.IndexTypes;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
-public class SearchServiceImpl extends RemoteServiceServlet implements
-        SearchService {
+public class SearchServiceImpl extends RemoteServiceServlet implements SearchService {
+
+
     private static HnswIndex<Integer, MsedRep, MsedItem, Float> index;
+    String dino2IndexPath = null;
+    String dino2L2IndexPath = null;
 
     @Override
     public String initialise(IndexTypes.INDEX_TYPES indexType) {
+        // Load the path to initialise index
+        Properties properties = new Properties();
+
+        try (InputStream input = new FileInputStream("config.properties")) {
+            // Load the properties file
+            properties.load(input);
+
+            // Get the value of the property "index-path"
+             dino2IndexPath = properties.getProperty("index-path-dino2");
+             dino2L2IndexPath = properties.getProperty("index-path-dino2-l2");
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         try {
             if (this.index == null) {
                 this.index = getLoadedIndex(indexType);
@@ -80,9 +100,9 @@ public class SearchServiceImpl extends RemoteServiceServlet implements
     private HnswIndex<Integer, MsedRep, MsedItem, Float> getLoadedIndex(IndexTypes.INDEX_TYPES indexType) throws IOException {
         switch (indexType) {
             case DINO2_L2:
-                return HnswIndex.load(new File("/Volumes/Data/mf_dino_sm10_hnsw_1m_l2.obj"));
+                return HnswIndex.load(new File(dino2L2IndexPath));
             case DINO2:
-                return HnswIndex.load(new File("/Volumes/Data/mf_dino_sm10_hnsw_1m.obj"));
+                return HnswIndex.load(new File(dino2IndexPath));
         }
 
         throw new RuntimeException("Unspecified index load!");

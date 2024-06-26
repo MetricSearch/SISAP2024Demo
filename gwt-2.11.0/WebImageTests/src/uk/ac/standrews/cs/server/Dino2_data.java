@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Dino2_data {
-
-
     private static final int dimensions = 384;
     private static String pathroot = "/Volumes/Data/mf_dino2/mf_dino2_text/";
     private static String javaPathRoot = "/Volumes/Data/mf_dino2/mf_dino2_java/";
