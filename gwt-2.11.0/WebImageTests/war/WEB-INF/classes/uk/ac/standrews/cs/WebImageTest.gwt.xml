@@ -28,6 +28,4 @@
 
   <!-- allow Super Dev Mode -->
   <add-linker name="xsiframe"/>
-
-  <stylesheet src="/Users/bc89/IdeaProjects/WebImageProject/gwt-2.11.0/WebImageTests/src/uk/ac/standrews/cs/styles.css"/>
 </module>
