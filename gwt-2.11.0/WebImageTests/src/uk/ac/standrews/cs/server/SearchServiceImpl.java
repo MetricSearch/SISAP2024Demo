@@ -21,24 +21,23 @@ public class SearchServiceImpl extends RemoteServiceServlet implements SearchSer
 
     @Override
     public String initialise(IndexTypes.INDEX_TYPES indexType) {
-//        // Load the path to initialise index
-//        Properties properties = new Properties();
-//
-//        try (InputStream input = new FileInputStream("config.properties")) {
-//            // Load the properties file
-////            properties.load(input);
-//
-//            // Get the value of the property "index-path"
-////             dino2IndexPath = properties.getProperty("index-path-dino2");
-////             dino2L2IndexPath = properties.getProperty("index-path-dino2-l2");
-//            dino2L2IndexPath = "/Volumes/Data/mf_dino_sm10_hnsw_1m_l2.obj";
-//        } catch (FileNotFoundException e) {
-//            throw new RuntimeException(e);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
+        // Load the path to initialise index
+        Properties properties = new Properties();
 
-        dino2L2IndexPath = "/Volumes/Data/mf_dino_sm10_hnsw_1m_l2.obj";
+        try (InputStream input = new FileInputStream("config.properties")) {
+            // Load the properties file
+            properties.load(input);
+
+            // Get the value of the property "index-path"
+             dino2IndexPath = properties.getProperty("index-path-dino2");
+             dino2L2IndexPath = properties.getProperty("index-path-dino2-l2");
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+//        dino2L2IndexPath = "/Volumes/Data/mf_dino_sm10_hnsw_1m_l2.obj";
 
         try {
             if (this.index == null) {
