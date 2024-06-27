@@ -11,7 +11,7 @@ public class ExamplesPanel extends VerticalPanel {
     HashMap<String, Integer> exampleQueries;
 
     public ExamplesPanel(QueryPanel queryPanel) {
-        this.add(new HTML("<h2>Example Queries</h2>"));
+        this.add(new HTML("<h2>Example Images</h2>"));
         DisclosurePanel examples = new DisclosurePanel("Examples");
         examples.setAnimationEnabled(true);
 
