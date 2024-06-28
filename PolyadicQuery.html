@@ -5,6 +5,57 @@
     <title>Polyadic Query</title>
 </head>
 <body>
-This is where the text will be.
+<H1>The Polyadic Query Demonstration</H1>
+This software permits (repeated) polyadic queries to be performed over the 1M MirFlickr dataset.
+You may select any number of images to be used as query parameters.
+When you hit <a style="font-family: 'Lucida Console', monospace;background-color:LightGrey;">search</a> a query is performed using the
+selcted parameters and the results shown along with the time taken to query the database.
+
+<H1>The user interface</H1>>
+
+
+The functionality of the interface components is as follows:
+<ol>
+    <li> The <a style="font-family: 'Lucida Console', monospace;background-color:LightGrey;">search</a> button performs a polyadic search with whichever images are selected in the <i>query panel</i> (below the buttons).
+         This causes the 100 nearest neighbours of the polyadic query formed using the selected images to be displayed in the <i>results panel</i> (the main part of the page).
+         The time taken in ms to perform the query is shown at the foot of the page.</li>
+    <li> The <a style="font-family: 'Lucida Console', monospace;background-color:LightGrey;">update query</a> button adds any images selected from the <i>results panel</i> to the <i>query panel</i> .</li>
+    <li> The <a style="font-family: 'Lucida Console', monospace;background-color:LightGrey;">add mf query id</a> adds the image corresponding to the integer entered in the the <i>query\_id box</i>.
+         For example if the <i>query_id box</i> contains the image id "181360" a picture of a Bugatti would be added.</li>
+    <li> The <a style="font-family: 'Lucida Console', monospace;background-color:LightGrey;">random query</a> replaces the contents of the  <i>query panel</i> with five new images and selects them all.</li>
+    <li> The <a style="font-family: 'Lucida Console', monospace;background-color:LightGrey;">clear queries</a> button removes all the entries in the <i>query panel</i>.</li>
+    <li> The <a style="font-family: 'Lucida Console', monospace;background-color:LightGrey;">copy result IDs</a> button copies the MirFlickr IDs of the results currently on screen to the clipboard.</li>
+    <li> The information toggle checkboxes permit the rank ordering, MirFlickr IDs, and distances to be shown below the results.</li>
+    <li> The <a style="font-family: 'Lucida Console', monospace;background-color:LightGrey;">examples panel</a> (on the right hand side) contains example queries. Any image may be clicked on to add it to the <i>query panel</i>.</li>
+    <li> Lastly, any of the images in the <i>results set</i> or <i>query panel</i> may be clicked on to enlarge them. The enlarged image may be clicked on to close it.</li>
+</ol>
+
+<H1>Some suggested queries</H1>
+
+Starting with <img src="https://similarity.cs.st-andrews.ac.uk/mirflickr/thumbs/19/im181361.jpg" alt="Bugatti Veyronimg" /> see if you can fill the screen with other Bugatti Veyrons, Aston Martins or Ferarris.
+<br>
+Starting with <img src="https://similarity.cs.st-andrews.ac.uk/mirflickr/thumbs/38/im370922.jpg" alt="Wolf hound" /> see if you can fill the screen with collies, wolf hounds, spaniels etc.
+<br>
+Starting with <img src="https://similarity.cs.st-andrews.ac.uk/mirflickr/thumbs/23/im224599.jpg" alt="Clown fish" /> can you find images that look like this image: 
+<img src="https://similarity.cs.st-andrews.ac.uk/mirflickr/thumbs/17/im163864.jpg" alt="blue fish" />
+
+<H1>Some research papers related to Polyadic Queries</H1>
+
+Demonstrating the Efficacy of Polyadic Queries
+<br>
+Scalable Polyadic Queries
+<br>
+<a href="https://research-repository.st-andrews.ac.uk/bitstream/handle/10023/29249/Connor-2023-Similarity-search-with-multiple-SISAP2023-AAM-CCBY.pdf;jsessionid=26A26C4782B8127CFB1AA032825055FA?sequence=1">Similarity Search with Multiple-Object Queries</a>
+<br>
+<a href="https://risweb.st-andrews.ac.uk/admin/files/302500979/entropy-3017950-peer-review-r1.pdf">Correlations of Cross-Entropy Loss in Machine Learning</a>
+
+<H1>Authors</H1>
+<ul>    
+    <li>Ben Claydon (bc89)</li>
+    <li>Richard Connor (rchc)</li>
+    <li>Alan Dearle (al)</li>
+</ul>
+@ st-andrews.ac.uk
+
 </body>
 </html>
