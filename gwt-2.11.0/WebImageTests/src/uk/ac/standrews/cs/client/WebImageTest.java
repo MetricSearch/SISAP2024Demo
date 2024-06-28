@@ -221,7 +221,7 @@ public class WebImageTest implements EntryPoint {
         Button helpButton = new Button("help", new ClickHandler() {
             @Override
             public void onClick(ClickEvent clickEvent) {
-
+                Window.Location.assign("https://similarity.cs.st-andrews.ac.uk/PolyadicQuery.html");
             }
         });
 
