@@ -1,6 +1,8 @@
 package uk.ac.standrews.cs.shared;
 
-public class IndexTypes {
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+public class IndexTypes implements IsSerializable {
     public enum INDEX_TYPES {
         DINO2 {
             @Override
