@@ -13,7 +13,7 @@ public class QueryPanel extends HorizontalPanel {
     QueryPanel() {
         queryIds = new TreeSet<>();
         Random r = new Random();
-        int queryId = 0;//r.nextInt(1_000_000);
+        int queryId = 1; //r.nextInt(1_000_000);
         queryIds.add(queryId);
         this.add(new ThumbImageButton(queryId, -1, queryIds, true, true, false, false, -1));
     }
