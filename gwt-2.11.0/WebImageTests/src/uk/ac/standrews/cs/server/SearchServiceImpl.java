@@ -11,27 +11,16 @@ import java.util.*;
 
 public class SearchServiceImpl extends RemoteServiceServlet implements SearchService {
 
+    private static final String DINO_L2_INDEX_PATH = "/var/www/html/PolyDemo/mf_dino_sm10_hnsw_1m_l2.obj";
+
     private static HnswIndex<Integer, MsedRep, MsedItem, Float> index;
     String dino2L2IndexPath = null;
 
     @Override
     public String initialise() {
-        // Load the path to initialise index
-        Properties properties = new Properties();
 
-        try (InputStream input = new FileInputStream("config.properties")) {
-            // Load the properties file
-            properties.load(input);
-
-            // Get the value of the property "index-path"
-             dino2L2IndexPath = properties.getProperty("index-path-dino2-l2");
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-//        dino2L2IndexPath = "/Volumes/Data/mf_dino_sm10_hnsw_1m_l2.obj";
+        // Get the value of the property "index-path"
+        dino2L2IndexPath = DINO_L2_INDEX_PATH;
 
         try {
             if (this.index == null) {
