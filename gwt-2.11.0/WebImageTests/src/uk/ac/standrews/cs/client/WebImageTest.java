@@ -1,20 +1,16 @@
 package uk.ac.standrews.cs.client;
 
-import com.google.gwt.dom.client.Style;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.*;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import uk.ac.standrews.cs.shared.IndexTypes;
+import com.google.gwt.user.client.ui.*;
 import uk.ac.standrews.cs.shared.IndexSearchResult;
 
-import javax.servlet.jsp.tagext.JspTag;
 import java.util.*;
 
 import static com.google.gwt.dom.client.Style.Unit.PCT;
@@ -23,7 +19,6 @@ import static com.google.gwt.dom.client.Style.Unit.PCT;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class WebImageTest implements EntryPoint {
-    final IndexTypes.INDEX_TYPES indexType = IndexTypes.INDEX_TYPES.DINO2_L2;
     private final SearchServiceAsync searchService = GWT.create(SearchService.class);
     List<Integer> resultIds;
     IndexSearchResult lastSearch;
@@ -258,10 +253,10 @@ public class WebImageTest implements EntryPoint {
             }
         });
 
-        buttonPanel.add(new Label("initialising index " + indexType + " , one moment please..."));
+        buttonPanel.add(new Label("initialising index Dino2 L2 normed , one moment please..." ));
         //first, load the dino2/msed hnsw onto the server
         try {
-            searchService.initialise(indexType, new AsyncCallback<String>() {
+            searchService.initialise(new AsyncCallback<String>() {
                 @Override
                 public void onFailure(Throwable e) {
                     Window.alert("oh dear can't initialise: " + e);

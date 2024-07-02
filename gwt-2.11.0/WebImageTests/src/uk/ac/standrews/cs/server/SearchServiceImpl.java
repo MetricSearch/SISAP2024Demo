@@ -2,25 +2,20 @@ package uk.ac.standrews.cs.server;
 
 import com.github.jelmerk.knn.*;
 import com.github.jelmerk.knn.hnsw.HnswIndex;
-
-import uk.ac.standrews.cs.client.SearchService;
-
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import uk.ac.standrews.cs.client.SearchService;
 import uk.ac.standrews.cs.shared.IndexSearchResult;
-import uk.ac.standrews.cs.shared.IndexTypes;
 
 import java.io.*;
 import java.util.*;
 
 public class SearchServiceImpl extends RemoteServiceServlet implements SearchService {
 
-
     private static HnswIndex<Integer, MsedRep, MsedItem, Float> index;
-    String dino2IndexPath = null;
     String dino2L2IndexPath = null;
 
     @Override
-    public String initialise(IndexTypes.INDEX_TYPES indexType) {
+    public String initialise() {
         // Load the path to initialise index
         Properties properties = new Properties();
 
@@ -29,7 +24,6 @@ public class SearchServiceImpl extends RemoteServiceServlet implements SearchSer
             properties.load(input);
 
             // Get the value of the property "index-path"
-             dino2IndexPath = properties.getProperty("index-path-dino2");
              dino2L2IndexPath = properties.getProperty("index-path-dino2-l2");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -41,7 +35,7 @@ public class SearchServiceImpl extends RemoteServiceServlet implements SearchSer
 
         try {
             if (this.index == null) {
-                this.index = getLoadedIndex(indexType);
+                this.index = getLoadedIndex();
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -99,15 +93,8 @@ public class SearchServiceImpl extends RemoteServiceServlet implements SearchSer
         return isr;
     }
 
-    private HnswIndex<Integer, MsedRep, MsedItem, Float> getLoadedIndex(IndexTypes.INDEX_TYPES indexType) throws IOException {
-        switch (indexType) {
-            case DINO2_L2:
-                return HnswIndex.load(new File(dino2L2IndexPath));
-            case DINO2:
-                return HnswIndex.load(new File(dino2IndexPath));
-        }
-
-        throw new RuntimeException("Unspecified index load!");
+    private HnswIndex<Integer, MsedRep, MsedItem, Float> getLoadedIndex() throws IOException {
+        return HnswIndex.load(new File(dino2L2IndexPath));
     }
 
     private <Tid, Tvector, Tdistance extends Comparable<Tdistance>, Titem extends Item<Tid, Tvector>>
