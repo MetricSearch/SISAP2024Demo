@@ -2,8 +2,7 @@ package uk.ac.standrews.cs.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.*;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.Window;
@@ -177,6 +176,28 @@ public class WebImageTest implements EntryPoint {
         TextBox queryBox = new TextBox();
         queryBox.getElement().setAttribute("placeholder", "specify query id (e.g, 100)");
 
+        queryBox.addKeyDownHandler(new KeyDownHandler() {
+                @Override
+                public void onKeyDown(KeyDownEvent event) {
+                    if(event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
+                        try {
+                            Set<Integer> newIds = queryPanel.getQueryIds();
+                            int id = Integer.parseInt(queryBox.getValue());
+
+                            if (id < 0 || id > 999999) {
+                                throw new NumberFormatException();
+                            }
+
+                            newIds.add(id);
+                            queryPanel.updateImageIds(newIds);
+                            queryBox.setText("");
+                        } catch (NumberFormatException e) {
+                            Window.alert("Please enter a valid number!");
+                        }
+                    }
+                }
+        });
+
         Button queryIDButton = new Button("add mf query id", new ClickHandler() {
             @Override
             public void onClick(ClickEvent clickEvent) {
@@ -190,6 +211,7 @@ public class WebImageTest implements EntryPoint {
 
                     newIds.add(id);
                     queryPanel.updateImageIds(newIds);
+                    queryBox.setText("");
                 } catch (NumberFormatException e) {
                     Window.alert("Please enter a valid number!");
                 }
