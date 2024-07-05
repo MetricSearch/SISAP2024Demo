@@ -99,6 +99,7 @@ public class WebImageTest implements EntryPoint {
 
         resultIds = new ArrayList<>();
         HorizontalPanel buttonPanel = new HorizontalPanel();
+        buttonPanel.setSpacing(2);
         buttonPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         Panel imagePanel = new ScrollPanel();
 
@@ -174,6 +175,7 @@ public class WebImageTest implements EntryPoint {
 
 
         TextBox queryBox = new TextBox();
+        queryBox.getElement().setAttribute("placeholder", "specify query id (e.g, 100)");
 
         Button queryIDButton = new Button("add mf query id", new ClickHandler() {
             @Override
@@ -277,13 +279,15 @@ public class WebImageTest implements EntryPoint {
                     buttonPanel.add(copyButton);
                     buttonPanel.add(helpButton);
 
-                    SimplePanel test = new SimplePanel();
+                    buttonPanel.add(new HTML("&nbsp;&nbsp;"));
                     buttonPanel.add(new Label("Show ID"));
                     buttonPanel.add(showIds);
 
+                    buttonPanel.add(new HTML("&nbsp;&nbsp;"));
                     buttonPanel.add(new Label("Show Dist"));
                     buttonPanel.add(showDists);
 
+                    buttonPanel.add(new HTML("&nbsp;&nbsp;"));
                     buttonPanel.add(new Label("Show Rank"));
                     buttonPanel.add(showRank);
 

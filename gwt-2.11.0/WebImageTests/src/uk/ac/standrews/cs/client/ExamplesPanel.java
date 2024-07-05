@@ -52,32 +52,13 @@ public class ExamplesPanel extends VerticalPanel {
         map.put("Peacock", 101102);
         map.put("Blue Tit", 263209);
         map.put("Clownfish", 224598);
-        map.put("Burger1", 999128);
-        map.put("Burger2", 269098);
-        map.put("Burger3", 205819);
-
         map.put("Bottle", 808080);
-        map.put("Bottle1", 999128);
-        map.put("Bottle2", 269098);
-        map.put("Bottle3", 205819);
-
+        map.put("Burger1", 238785);
         map.put("Train", 95685);
-
         map.put("BlueFlower1", 392663);
-        map.put("BlueFlower2", 490535);
-
-        map.put("Windmill", 196632);
-
-        map.put("Beach", 30442);
-
         map.put("Police Car", 277685);
-
-        map.put("Paddy Field", 482589);
-
         map.put("Submarine", 745180);
-
         map.put("Insect", 588519);
-
         map.put("Sunset", 513890);
         return map;
     }
