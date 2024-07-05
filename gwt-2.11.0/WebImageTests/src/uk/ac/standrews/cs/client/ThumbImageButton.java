@@ -25,8 +25,8 @@ public class ThumbImageButton extends VerticalPanel {
         }
 
         if (dist != -1 && dists) {
-            String formattedDist = NumberFormat.getFormat("0.####E0").format(dist);
-            sb.append("<b>Dist:</b> " + formattedDist + "<br>");
+            String formattedDist = NumberFormat.getFormat("0.0000E0").format(dist);
+            sb.append("<b>Dist:</b> " + formattedDist + "&nbsp; <br>");
             //label = new HTML("<b>ID:</b> " + id + "<br><b>Dist:</b> " + formattedDist);
         }
 
